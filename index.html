@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sagmeister Walsh & Reactive - A Critical Comparison</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+	<style>
+		/* ========================= */
+		/* -------ANIMATIONS-------- */
+		/* ========================= */
+		
+
+
+		/* ========================= */
+		/* ----------FONTS---------- */
+		/* ========================= */
+		@font-face {
+		  font-family: 'DIN';
+		  src: url('fonts/DINAlternate-Bold.eot?#iefix') format('embedded-opentype'),  url('fonts/DINAlternate-Bold.woff') format('woff'), url('fonts/DINAlternate-Bold.ttf')  format('truetype'), url('fonts/DINAlternate-Bold.svg#DINAlternate-Bold') format('svg');
+		  font-weight: normal;
+		  font-style: normal;
+		}
+
+		body {
+			font-size: 16px;
+		}
+
+		p, h1, h2, h3, h4, h5, h6, a, ul, ol, li {
+			font-family: 'DIN', 'DIN Alternate Bold', Avenir, Helvetica, Arial, sans-serif !important;	
+		}
+
+		ul, ol, li {
+			text-align: left;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			text-transform: uppercase;
+			text-align: center;
+		}
+
+		h1, h2, h3 {
+			margin-bottom: 25px;
+		}
+
+		h1 {
+			font-size: 3em;
+		}
+	
+		h2 {
+			font-size: 3em;
+		}
+
+			h2.subtitle {
+				font-size: 1.3em;
+			}
+
+		h3 {
+			font-size: 2em;
+		}
+
+		h4 {
+			font-size: 1.5em;
+			margin-top: 50px;
+		}
+
+		p {
+			font-size: 1.1em;
+			line-height: 1.7em;
+		}
+
+		blockquote {
+			font-size: 1.5em;
+			font-family: 'DIN', 'DIN Alternate Bold', Avenir, Helvetica, Arial, sans-serif !important;	
+			border-left: 0;
+		}
+
+			blockquote.content-quote {
+				margin-top: 50px;
+			}
+
+		.border-text {
+			border: 3px solid white;
+			padding: 10px 30px;
+			border-radius: 2px;
+
+			transition: all .3s ease;
+		}
+			.border-text:hover {
+				background-color: white;
+				color: #4d4d4d;
+			}
+
+		/* ========================= */
+		/* ---------GENERAL--------- */
+		/* ========================= */
+		img {
+			width: 100%;
+			
+		}
+			img.staff-img {
+				margin-bottom: 25px;
+			}
+
+			.content-img {
+				margin: 50px 0;
+			}
+
+		.main-logo {
+			padding: 110px 0;
+			position: relative;
+		}
+
+		.section-wrap {
+			width: 100%;
+		}
+
+		.feature {
+			min-height: 700px;
+			color: #fff;
+			position: relative;
+		}
+			.feature-content {
+				margin: 0;
+				padding: 0;
+				position: absolute;
+				top: 50%;
+				
+				transform: translate(0,-50%);
+				-o-transform: translate(0,-50%);
+				-ms-transform: translate(0,-50%);
+				-moz-transform: translate(0,-50%);
+				-webkit-transform: translate(0,-50%);
+				
+			}
+
+		.masthead {
+			/*
+			margin: 50px;
+			*/
+			color: white;
+
+		}
+
+		.cover-img {
+			
+			background-position: center bottom;
+			background-attachment: fixed;
+			background-repeat: no-repeat;
+			
+			-webkit-background-size: cover;     
+		    -moz-background-size: cover;
+		    -o-background-size: cover;
+		    background-size: cover;
+		}
+		.scroll {
+			background-attachment: scroll;
+		}
+
+		.arrow {
+			transform: rotate(180deg);
+			-o-transform: rotate(180deg);
+			-ms-transform: rotate(180deg);
+			-moz-transform: rotate(180deg);
+			-webkit-transform: rotate(180deg);
+
+			display: block;
+			font-size: 4em;
+			color: white;
+			text-align: center;
+			
+			margin-top: -75px;
+			margin-bottom: 50px;
+
+			animation: bounce 1.5s ease infinite !important ;
+			-webkit-animation: bounce 1.5s ease infinite !important ;
+		}
+
+			.arrow a {
+				text-decoration: none;
+				color: white;
+			}
+
+		@-webkit-keyframes bounce {
+		    0% {
+		    	transform: rotate(180deg) translateY(0);
+		    	-moz-transform: rotate(180deg) translateY(0);
+		    	-webkit-transform: rotate(180deg) translateY(0);
+		    }
+		    50% {
+		    	transform: rotate(180deg) translateY(-12.5px);
+		    	-moz-transform: rotate(180deg) translateY(-12.5px); 
+		    	-webkit-transform: rotate(180deg) translateY(-12.5px);
+		    }
+		    100% {
+		    	transform: rotate(180deg) translateY(0);
+		    	-moz-transform: rotate(180deg) translateY(0);
+		    	-webkit-transform: rotate(180deg) translateY(0);
+		    }
+		}
+		@-moz-keyframes bounce {
+		    0% {
+		    	transform: rotate(180deg) translateY(0);
+		    	-moz-transform: rotate(180deg) translateY(0);
+		    	-webkit-transform: rotate(180deg) translateY(0);
+		    }
+		    50% {
+		    	transform: rotate(180deg) translateY(-12.5px);
+		    	-moz-transform: rotate(180deg) translateY(-12.5px); 
+		    	-webkit-transform: rotate(180deg) translateY(-12.5px);
+		    }
+		    100% {
+		    	transform: rotate(180deg) translateY(0);
+		    	-moz-transform: rotate(180deg) translateY(0);
+		    	-webkit-transform: rotate(180deg) translateY(0);
+		    }
+		}
+		@keyframes bounce {
+		    0% {
+		    	transform: rotate(180deg) translateY(0);
+		    	-moz-transform: rotate(180deg) translateY(0);
+		    	-webkit-transform: rotate(180deg) translateY(0);
+		    }
+		    50% {
+		    	transform: rotate(180deg) translateY(-12.5px);
+		    	-moz-transform: rotate(180deg) translateY(-12.5px); 
+		    	-webkit-transform: rotate(180deg) translateY(-12.5px);
+		    }
+		    100% {
+		    	transform: rotate(180deg) translateY(0);
+		    	-moz-transform: rotate(180deg) translateY(0);
+		    	-webkit-transform: rotate(180deg) translateY(0);
+		    }
+		}
+
+		.content-area {
+			padding: 50px 0;
+		}
+
+		footer h6 a {
+			color: #808080;
+			font-size: 1.2em;
+		}
+			footer h6 a:hover {
+				color: #d9d9d9;
+				text-decoration: none;
+			}
+
+		.carousel-caption {
+			background-color: rgba(0,0,0,.5);
+		}
+
+		/* ========================= */
+		/* -----COLOR-MODIFIERS----- */
+		/* ========================= */
+		.grey {
+			background-color: #ccc;
+			color: #4d4d4d;
+		}
+
+		.navy {
+			background-color: #1E374B;
+			color: #fff;
+		}
+		
+		.dark-grey {
+			background-color: #4D4D4D;
+			color: #fff;
+		}
+
+		.super-dark-grey {
+			background-color: #333;
+			color: #fff;
+		}
+
+		.dark-box {
+			/*
+			background-color: rgba(0,0,0,.7);
+			margin-top: 50px;
+			padding: 1px 25px 25px 25px;
+			*/
+		}
+
+		.inner-shadow {
+			box-shadow: inset 0 0 5px 0 rgba(0,0,0,.5);
+			-o-box-shadow: inset 0 0 5px 0 rgba(0,0,0,.5);
+			-ms-box-shadow: inset 0 0 5px 0 rgba(0,0,0,.5);
+			-moz-box-shadow: inset 0 0 5px 0 rgba(0,0,0,.5);
+			-webkit-box-shadow: inset 0 0 5px 0 rgba(0,0,0,.5);
+		}
+
+		/* ========================= */
+		/* ---------HELPERS--------- */
+		/* ========================= */
+		.left-align {
+			text-align: left !important;
+		}
+		.center-align {
+			text-align: center !important;
+		}
+		.right-align {
+			text-align: right !important;
+		}
+
+		.reference-list {
+			line-height: 2;
+		}
+			.reference-list li {
+				margin-bottom: 1em;
+			}
+
+		/* ========================= */
+		/* -----------NAV----------- */
+		/* ========================= */
+		.top-nav {
+			height: 50px;	
+			line-height: 50px;
+			text-transform: uppercase;
+			background-color: rgba(255,255,255,.85);
+			z-index: 100;
+		}
+
+		nav {
+			text-align: center;	
+		}
+			nav span {
+				padding: 0 20px;
+			}
+
+				nav span a {
+					color: #808080;
+				}
+					nav span a:hover {
+						color: black;
+						text-decoration: none;
+					}
+
+		@media screen and (max-width: 992px) {
+			nav span {
+				padding: 0 10px;
+			}
+			nav span a {
+				font-size: .8em;
+			}
+		}
+		@media screen and (max-width: 669px) {
+			nav span {
+				padding: 0 5px;
+			}
+			nav span a {
+				font-size: .7em
+			}
+		}
+		@media screen and (max-width: 549px) {
+			nav span {
+				padding: 0 2px;
+			}
+			nav span a {
+				font-size: .6em
+			}
+		}
+
+		.scrolled {
+			position: fixed;
+			margin-top: -50px;
+		}
+		.sneak {
+			transition: all .5s ease;
+			-moz-transition: all .5s ease;
+			-webkit-transition: all .5s ease;
+		}
+		.show {
+			margin-top: 0;
+			transition: all .5s ease;
+			-moz-transition: all .5s ease;
+			-webkit-transition: all .5s ease;
+		}
+
+		/* ========================= */
+		/* -------HACK-FIXES-------- */
+		/* ========================= */
+		.hack-fix-1 {
+			margin: 50px 0 0 0;
+		}
+
+		.carousel {
+			margin: 50px 0;
+		}
+
+		/* ========================= */
+		/* -------CONCEPTIONS------- */
+		/* ========================= */
+		.conception:before {
+			content: " ";
+			display: block;
+			width: 20px;
+			height: 20px;
+			background-color: #1E374B;
+			border-radius: 10px;
+			position: absolute;
+		}
+	
+		/* Sagmeister Walsh */
+		#conception-1-1:before {top: 49%; left: 25%;}
+		#conception-1-2:before {top: 52%; left: 30%;}
+
+		/* Reactive */
+		#conception-2-1:before {top: 35%; left: 10%;}
+		#conception-2-2:before {top: 69%; left: 18%;}
+
+	</style>
+
+	<meta name="viewport" content="initial-scale=1">
+</head>
+<body id="to-top">
+
+	<section class="section-wrap top-nav hidden-xs" id="main-nav">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<nav id="top-nav">
+						<span><a href="#introduction">Introduction</a></span>
+						<span><a href="#digital-design">Digital Design</a></span>
+						<span><a href="#companies">The Companies</a></span>
+						<span><a href="#clients">Clients</a></span>
+						<span><a href="#designapproach">Design Approach</a></span>
+						<span><a href="#works-cited">Works Cited</a></span>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="section-wrap cover-img" style="background-image: url(img/masthead-bg.jpg);">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2 feature full-height">
+					<div class="feature-content">
+						<img src="img/masthead.png" class="main-logo">
+						<span class="arrow"><a href="#introduction">^</a></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-wrap content-area grey" id="introduction">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<h1>Introduction</h1>
+					<h2 class="subtitle">A Critical Comparison Between Sagmeister Walsh and Reactive</h2>
+					<p>The purpose of this web page is to provide a critical comparison between the two creative studios of Sagmeister Walsh and Reactive. Although not exclusively, both of these studios operate in within the same sector and specialisation as each other - that is, the sector of Design Consultancy and the specialisation of digital design. The two studios operate in very different capacities; Sagmeister Walsh is a small studio working on the international level (Sagmeister &amp; Walsh, 2015), whilst Reactive is large studio operating primarily within Australia (&quot;What We Do,&quot; 2015).</p>
+
+					<p>With digital design in the sector of design consultancy being such a broad field (&quot;Design Disciplines,&quot; 2015), the differences and similarities between a small and a large firm will no doubt be significant and noteworthy. These differences and similarities will be highlighted and contrasted to provide a well-rounded look at this sector and specialisation.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-wrap cover-img inner-shadow" style="background-image: url('img/hand-model.jpg');" id="digital-design" >
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2 feature full-height">
+					<div class="feature-content center-align">
+						<h1>What is digital design?</h1>
+
+						<blockquote class="center-align">
+							&quot;Multimedia and web designers develop and prepare information for digital publication with particular emphasis on clarity of communication and the matching of information styles to audience requirements.&quot;<br><br>
+							<span style="display: block" class="right-align">- DIA, 2015</span>
+						</blockquote>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-wrap content-area navy" id="companies">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<h1>The Companies</h1>
+				</div>
+				<div class="col-sm-6">
+					<h3>Sagmeister Walsh</h3>
+					<img src="img/sw-staff.png" alt="" class="staff-img">
+					<p>Originally founded in 1993 by Stefan Sagmeister and then later merged with Jessica Walsh in 2012, Sagmeister Walsh is a successful, award winning international design studio (&quot;S&amp;W Awards,&quot; 2015) based in New York. The creative studio works within the sector of visual communication design spanning multiple specialisations including branding, web &amp; interactive, print and other types of design; they are truly a multi-disciplinary design studio (Sagmeister &amp; Walsh, 2015). This large pool of disciplines easily places them within the specialisation, and focus of this comparison, of digital design.</p>
+					<p>Sagmeister Walsh is a small design studio with only 2 partners and 3 full time staff. From high end eastern fashion (&quot;Aishti Identity,&quot; 2010), to European car manufacturers (&quot;BMW Book,&quot; 2010), the small size of the studio hasn&amp;#39;t limited themselves in terms of the quality and size of clients they have the opportunity to work with (Sagmeister &amp; Walsh, 2015).</p>
+				</div>
+				<div class="col-sm-6">
+					<h3>Reactive</h3>
+					<img src="img/r-staff.png" alt="" class="staff-img">
+					<p>Founded in 1997, Reactive is an award winning Digital Agency serving both Australia and New Zealand with offices in Sydney, Melbourne and Auckland (&quot;Who We Are,&quot; 2015). Reactive works within the sector of visual communication design with a focus on the specialisations of Web, Interactive and all forms of digital design. This clear-cut association with the digital design specialisation played a large role in selecting them for this comparison.</p>
+					<p>Reactive is a large studio; with over 130 employees they not only one of the largest and longest running digital design firms across Australia (&quot;Who We Are,&quot; 2015) but are also supplying constant jobs to young designers across Australia and New Zealand (&quot;Current Opportunities,&quot; 2015). The large scale of this design firm has allowed them to work with some big name clients including Coles (&quot;Coles Supermarket Website,&quot; 2013) and Nissan (&quot;Nissan Website,&quot; 2015).</p>
+				</div>
+				<div class="col-sm-8 col-sm-offset-2 center-align">
+					<blockquote class="content-quote">For these specific design firms, the size of the studio has been irrelevant to the clients they have had the opportunity to work with. This goes against the traditional way that one would normally perceive the size of a company.</blockquote>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-wrap cover-img inner-shadow" style="background-image: url('img/client-collage.png');" id="clients">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-4 feature">
+					<div class="feature-content">
+						<img src="img/clients.png" alt="" class="" id="clients-logo">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-wrap content-area grey" id="designapproach">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+					<h1>Design Approach</h1>
+					<h3>Sagmeister Walsh</h3>
+					<div class="col-sm-6 conception" id="conception-1-1">
+						<img src="img/design-conceptions-1.png" alt="" class="content-img">
+					</div>
+					<div class="col-sm-6 conception" id="conception-1-2">
+						<img src="img/design-conceptions-2.png" alt="" class="content-img">
+					</div>
+					<p>Based on previous work that Sagmeister and Walsh have created (&quot;Work,&quot; 2015) and an interview conducted with Jessica Walsh (Treggiden, 2014), one of the partners, we can begin to piece together an idea of what the design approach of Sagmeister Walsh is. As is shown in the diagrams above, Sagmeister Walsh is identified as being a fairly even mix between 'Problem Solving' and 'Applied Creativity'. Their conception of design (Franz, Ferreira, Thambiratnam, &amp; Jerome, 1998) is identified as laying between 'Technical' and 'Philosophical'. These conclusions have been reached due to the large number of both technical (web design, branding, etc.) and artistic (album covers, etc.) projects the studio has undertaken.</p>
+					<div class="col-sm-12">
+						<img src="img/sw-process.png" alt="" class="content-img">
+					</div>
+					<p>The information provided by the Jessica Walsh interview (Treggiden, 2014) gave information on her creative process, seeing as she is one of the partners of the firm along with what Stefan Sagmeister says regarding her position: "Jessica will be in charge of the more commercial pieces" (Butler, 2012) we can infer that her creative process is a good indicator of the firm's creative process. These pieces of information have informed the above flowchart for the design process of Sagmeister Walsh.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-wrap cover-img inner-shadow" style="background-image: url('img/jewish-museum-blur.jpg');">
+		<div class="container">
+			<div class="row">
+				<div class="feature hack-fix-1">
+					<div class="col-sm-8 col-sm-offset-2">
+						<h2>Jewish Museum Re Brand</h2>
+						<h4><span class="border-text">Sagmeister Walsh</span></h4>
+						<div class="dark-box">
+							<div class="col-sm-4">
+								<h4>BRIEF:</h4>
+								<p class="text-left">Sagmeister Walsh was to conduct a complete rebranding of the Jewish Museum located in the Upper East Side of Manhattan. The goal was to connect the historic with the contemporary to engage visitors of multiple generations.</p>
+							</div>
+							<div class="col-sm-8">
+								<h4>EXECUTION:</h4>
+								<p class="text-left">The outcome was a brand is founded on the geometry of the Star of David. All design precedents are drawn from this grid from the typography to the illustration work. In order to cater for photography in this design language an app was developed that transformed any photo or webcam stream into a Jewish Museum style artwork. </p>
+								<p class="text-left">The final outcome consisted of a new identity, stationery, packaging, advertising campaigns, promotional materials, and a new website.<br>("Jewish Museum Identity," 2014)</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-8 col-sm-offset-2">
+						<div id="carousel-1" class="carousel slide" data-ride="carousel">
+						  <!-- Indicators -->
+						  <!--
+						  <ol class="carousel-indicators">
+						    <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+						    <li data-target="#carousel-1" data-slide-to="1"></li>
+						  </ol>
+						  -->
+
+						  <!-- Wrapper for slides -->
+						  <div class="carousel-inner" role="listbox">
+						    <div class="item active">
+						      <img src="img/sw/sw1.jpg" alt="...">
+						      <div class="carousel-caption">
+							      (<em>Jewish Museum Logo</em>, 2014)
+						      </div>
+						    </div>
+						    <div class="item">
+						      <img src="img/sw/sw2.jpg" alt="...">
+						      <div class="carousel-caption">
+							      (<em>Jewish Museum Monitor Mockup</em>, 2014)
+						      </div>
+						    </div>
+						    <div class="item">
+						      <img src="img/sw/sw3.gif" alt="...">
+						      <div class="carousel-caption">
+							      (<em>Jewish Museum Bag</em>, 2014)
+						      </div>
+						    </div>
+						    <div class="item">
+						      <img src="img/sw/sw4.jpg" alt="...">
+						      <div class="carousel-caption">
+							      (<em>Jewish Museum Photo Application</em>, 2014)
+						      </div>
+						    </div>
+						  </div>
+
+						  <!-- Controls -->
+						  <a class="left carousel-control" href="#carousel-1" role="button" data-slide="prev">
+						    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						    <span class="sr-only">Previous</span>
+						  </a>
+						  <a class="right carousel-control" href="#carousel-1" role="button" data-slide="next">
+						    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						    <span class="sr-only">Next</span>
+						  </a>
+						</div>
+
+						<div class="col-sm-12 col-sm-offset-0 center-align">
+							<blockquote class="content-quote" style="margin-bottom: 50px">The sheer reputation of Sagmeister Walsh allows them to be picky with their clients and at the same time, take on full creative development for their ideas. They only ever pitch one final piece of artwork their clients. This is VERY different than how most other creative studios would operate and major point of difference over a studio such as Reactive.</blockquote>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-wrap content-area grey" id="designapproach2">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<h1>Design Approach</h1>
+					<h3>Reactive</h3>
+					<div class="col-sm-6 conception" id="conception-2-1">
+						<img src="img/design-conceptions-1.png" alt="" class="content-img">
+					</div>
+					<div class="col-sm-6 conception" id="conception-2-2">
+						<img src="img/design-conceptions-2.png" alt="" class="content-img">
+					</div>
+					<p>Based on previous work that Reactive have created (&quot;Browse Work,&quot; 2015) and the interview conducted with one of the founders of Reactive, Tim O'Neill (Sagripanti, 2012) we can infer the design approach that Reactive takes as a studio. As shown by the diagrams above, we can see that Reactive leans more toward the 'Problem Solving' side of the chart - though, being a creative studio is also present in 'Applied Creativity'. Reactive's conception of design (Franz et al., 1998) has been placed right into the technical corner of the triangle. This has been decided due to their substantial foothold in technologically driven outcomes such as web sites, content management systems and user experience/interface design.</p>
+					<div class="col-sm-12">
+						<img src="img/r-process.png" alt="" class="content-img">
+					</div>
+					<p>Although Reactive do not explicitly state what their creative process is, by studying professional standards from others in the industry we can infer a creative process that is likely to have similarities to the process that Reactive implements. You can see the design process I have appropriated from information gained in a Smashing Magazine article (Reimer, 2011) on a typical web designer's process.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-wrap cover-img inner-shadow" style="background-image: url('img/tesco-blur.jpg');">
+		<div class="container">
+			<div class="row">
+				<div class="feature hack-fix-1">
+					<div class="col-sm-8 col-sm-offset-2">
+						<h2>Tesco Finest Web Design</h2>
+						<h4><span class="border-text">Reactive</span></h4>
+						<div class="dark-box">
+							<div class="col-sm-4">
+								<h4>BRIEF:</h4>
+								<p class="text-left">In 2013, Reactive was tasked with the design and development of a new website for Tesco Finest, a subsidiary of one of the largest retailers in the UK, Tesco. The ultimate goal of the website was to "instill immediate confidence in the consumer with the quality of Tesco finest products".</p>
+							</div>
+							<div class="col-sm-8">
+								<h4>EXECUTION:</h4>
+								<p class="text-left">What resulted was an innovatively designed website that allowed for the Tesco story to unfold in an intuitive and beautiful way. This is accomplished through large, captivating imagery, immersive videos and content that gently guides the user through the experience. </p>
+								<p class="text-left">The website also features responsive design meaning the design can adapt and reflow to best suit the viewing device regardless of its size. This is one of the most sought after features in web development with the boom of mobile computing.<br>("Tesco Finest Case Study," 2013)</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-8 col-sm-offset-2">
+						<div id="carousel-2" class="carousel slide" data-ride="carousel">
+						  <!-- Indicators -->
+						  <!--
+						  <ol class="carousel-indicators">
+						    <li data-target="#carousel-2" data-slide-to="0" class="active"></li>
+						    <li data-target="#carousel-2" data-slide-to="1"></li>
+						  </ol>
+						  -->
+
+						  <!-- Wrapper for slides -->
+						  <div class="carousel-inner" role="listbox">
+						    <div class="item active">
+						      <img src="img/r/r1.jpg" alt="...">
+						      <div class="carousel-caption">
+							      (<em>Tesco Finest Website 1</em>, 2013)
+						      </div>
+						    </div>
+						    <div class="item">
+						      <img src="img/r/r2.jpg" alt="...">
+						      <div class="carousel-caption">
+							      (<em>Tesco Finest Website 2</em>, 2013)
+						      </div>
+						    </div>
+						    <div class="item">
+						      <img src="img/r/r3.jpg" alt="...">
+						      <div class="carousel-caption">
+							      (<em>Tesco Finest Website 3</em>, 2013)
+						      </div>
+						    </div>
+						    <div class="item">
+						      <img src="img/r/r4.jpg" alt="...">
+						      <div class="carousel-caption">
+							      (<em>Tesco Finest Website 4</em>, 2013)
+						      </div>
+						    </div>
+						  </div>
+
+						  <!-- Controls -->
+						  <a class="left carousel-control" href="#carousel-2" role="button" data-slide="prev">
+						    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						    <span class="sr-only">Previous</span>
+						  </a>
+						  <a class="right carousel-control" href="#carousel-2" role="button" data-slide="next">
+						    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						    <span class="sr-only">Next</span>
+						  </a>
+						</div>
+
+						<div class="col-sm-12 col-sm-offset-0 center-align">
+							<blockquote class="content-quote" style="margin-bottom: 50px">Reactive seems to take a more methodological approach to their design work compared to Sagmeister Walsh's artful, expressive designs. This could be summed up to them being a dedicated digital studio rather than an all rounder such as Sagmeister Walsh. From an outside perspective, Reactive operates in a much more conventional way than a studio such as Sagmeister Walsh.</blockquote>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-wrap content-area navy" id="works-cited">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<h1>Works Cited</h1>
+				</div>
+				<div class="col-sm-6 reference-list" style="overflow: hidden;">
+					<ul>
+						<li><em>Aishti Identity</em>. (2010).   Retrieved 20 Apr, 2015, from <a href="http://www.sagmeisterwalsh.com/work/project/aishti-identity/">http://www.sagmeisterwalsh.com/work/project/aishti-identity/</a></li>
+						<li><em>BMW Book</em>. (2010).   Retrieved 20 Apr, 2015, from <a href="http://www.sagmeisterwalsh.com/work/project/bmw-book/">http://www.sagmeisterwalsh.com/work/project/bmw-book/</a></li>
+						<li><em>Browse Work</em>. (2015).   Retrieved 22 Apr, 2015, from <a href="http://www.reactive.com/work/browse-work.html">http://www.reactive.com/work/browse-work.html</a></li>
+						<li>Butler, A. (2012). <em>Sagmeister &amp; Walsh Interview and Recent Work</em>.   Retrieved 22 Apr, 2015, from <a href="http://www.designboom.com/design/sagmeister-walsh-interview-and-recent-work/">http://www.designboom.com/design/sagmeister-walsh-interview-and-recent-work/</a></li>
+						<li><em>Coles Supermarket Website</em>. (2013).   Retrieved 22 April, 2015, from <a href="http://www.reactive.com/work/browse-work/colescom-website.html">http://www.reactive.com/work/browse-work/colescom-website.html</a></li>
+						<li><em>Current Opportunities</em>. (2015).   Retrieved 22 Apr, 2015, from <a href="http://www.reactive.com/careers/current-opportunities.html">http://www.reactive.com/careers/current-opportunities.html</a></li>
+						<li><em>Design Disciplines</em>. (2015).   Retrieved March 22, 2015, from <a href="http://www.dia.org.au/index.cfm?id=240">http://www.dia.org.au/index.cfm?id=240</a></li>
+						<li>Franz, J. M., Ferreira, L., Thambiratnam, D., &amp; Jerome, K. J. (1998). <em>Recognising and addressing diversity in design understanding</em>. </li>
+						<li><em>Jewish Museum Identity</em>. (2014).   Retrieved 24 Apr, 2015, from <a href="http://www.sagmeisterwalsh.com/work/project/jewish-museum-identity/">http://www.sagmeisterwalsh.com/work/project/jewish-museum-identity/</a></li>
+						<li><em>Nissan Website</em>. (2015).   Retrieved 22 Apr, 2015, from <a href="http://www.reactive.com/work/browse-work/nissan-australia.html">http://www.reactive.com/work/browse-work/nissan-australia.html</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-6 reference-list" style="overflow: hidden;">
+					<ul>
+						<li>Reimer, L. (2011). <em>Following A Web Design Process</em>.   Retrieved 22 Apr, 2015, from <a href="http://www.smashingmagazine.com/2011/06/22/following-a-web-design-process/">http://www.smashingmagazine.com/2011/06/22/following-a-web-design-process/</a></li>
+						<li><em>S&amp;W Awards</em>. (2015).   Retrieved 20 Apr, 2015, from <a href="http://www.sagmeisterwalsh.com/news/category/awards/">http://www.sagmeisterwalsh.com/news/category/awards/</a></li>
+						<li>Sagmeister, S., &amp; Walsh, J. (2015). <em>About Us</em>.   Retrieved Apr 17, 2015, from <a href="http://www.sagmeisterwalsh.com/about/">http://www.sagmeisterwalsh.com/about/</a></li>
+						<li>Sagripanti, C. (2012). <em>Interview With Tim O&rsquo;Neill</em>.   Retrieved 17 Apr, 2015, from <a href="http://digital-nation.com.au/digital/interview-with-tim-oneill-reactive/">http://digital-nation.com.au/digital/interview-with-tim-oneill-reactive/</a></li>
+						<li><em>Tesco Finest Case Study</em>. (2013).   Retrieved 17 Apr, 2015, from <a href="http://www.reactive.com/work/browse-work/tesco-finest.html">http://www.reactive.com/work/browse-work/tesco-finest.html</a></li>
+						<li>Treggiden, K. (2014). <em>Interview: Jessica Walsh</em>.   Retrieved 22 Apr, 2015, from <a href="http://confessionsofadesigngeek.com/interview-jessica-walsh/">http://confessionsofadesigngeek.com/interview-jessica-walsh/</a></li>
+						<li><em>What We Do.</em> (2015).   Retrieved 17 Apr, 2015, from <a href="http://www.reactive.com/about/what-we-do.html">http://www.reactive.com/about/what-we-do.html</a></li>
+						<li><em>Who We Are.</em> (2015).   Retrieved 17 Apr, 2015, from <a href="http://www.reactive.com/about/who-we-are.html">http://www.reactive.com/about/who-we-are.html</a></li>
+						<li><em>Work. (2015).</em>   Retrieved 22 Apr, 2015, from <a href="http://www.sagmeisterwalsh.com/work/">http://www.sagmeisterwalsh.com/work/</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-8 col-sm-offset-2">
+					<h1>Images Cited</h1>
+				</div>
+				<div class="col-sm-6 reference-list" style="overflow: hidden;">
+					<ul>
+						<li><em>Jewish Museum Bag</em> [Photograph] (2014). Retrieved Apr 24, 2015, from <a href="http://www.sagmeisterwalsh.com/images/u_work/rotatingnew.gif">http://www.sagmeisterwalsh.com/images/u_work/rotatingnew.gif</a></li>
+						<li><em>Jewish Museum Logo</em> [Illustration] (2014). Retrieved Apr 24, 2015, from <a href="http://www.sagmeisterwalsh.com/images/u_work/jewishmuseumlogo6.jpg">http://www.sagmeisterwalsh.com/images/u_work/jewishmuseumlogo6.jpg</a></li>
+						<li><em>Jewish Museum Monitor Mockup</em> [Photograph] (2014). Retrieved Apr 24, 2015, from <a href="http://www.sagmeisterwalsh.com/images/u_work/jewishmuseummoniter2.jpg">http://www.sagmeisterwalsh.com/images/u_work/jewishmuseummoniter2.jpg</a></li>
+						<li><em>Jewish Museum Photo Application</em> [Screenshot] (2014). Retrieved Apr 24, 2015, from <a href="http://www.sagmeisterwalsh.com/images/made/images/u_work/jmphotoapps5_1800_1114.jpg">http://www.sagmeisterwalsh.com/images/made/images/u_work/jmphotoapps5_1800_1114.jpg</a></li>
+						<li><em>Staff Image Web</em> [Photograph] (2015). Retrieved Apr 24, 2015, from <a href="http://www.reactive.com/Media/images/staff-web-6a90fb5f-31db-4c65-9fef-3643bbb0bf03-0-400x300.jpg">http://www.reactive.com/Media/images/staff-web-6a90fb5f-31db-4c65-9fef-3643bbb0bf03-0-400x300.jpg</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-6 reference-list" style="overflow: hidden;">
+					<ul>
+						<li><em>Staff Photo</em> [Photograph] (2012). Retrieved Apr 24, 2015, from <a href="http://www.sagmeisterwalsh.com/images/u_work/thumb-3.jpg">http://www.sagmeisterwalsh.com/images/u_work/thumb-3.jpg</a></li>
+						<li><em>Tesco Finest Website 1</em> [Photo] (2013). Retrieved Apr 24, 2015, from <a href="http://www.reactive.com/media/images/slide6-7a0a03f3-cd93-4874-a0ff-eb907a8fb799-0-600x450.jpg">http://www.reactive.com/media/images/slide6-7a0a03f3-cd93-4874-a0ff-eb907a8fb799-0-600x450.jpg</a></li>
+						<li><em>Tesco Finest Website 2</em> [Screenshot] (2013). Retrieved Apr 24, 2015, from <a href="http://www.reactive.com/media/images/slide5-3471b366-adfe-40d2-823e-3223dbe7efdb-0-600x450.jpg">http://www.reactive.com/media/images/slide5-3471b366-adfe-40d2-823e-3223dbe7efdb-0-600x450.jpg</a></li>
+						<li><em>Tesco Finest Website 3</em> [Screenshot] (2013). Retrieved Apr 24, 2015, from <a href="http://www.reactive.com/media/images/slide2-a42232b2-3150-4960-9e1c-ebfcc3563677-0-600x450.jpg">http://www.reactive.com/media/images/slide2-a42232b2-3150-4960-9e1c-ebfcc3563677-0-600x450.jpg</a></li>
+						<li><em>Tesco Finest Website 4</em> [Screenshot] (2013). Retrieved Apr 24, 2015, from <a href="http://www.reactive.com/media/images/slide9-7dac5b26-215e-42d4-b64a-d68d62812696-0-600x450.jpg">http://www.reactive.com/media/images/slide9-7dac5b26-215e-42d4-b64a-d68d62812696-0-600x450.jpg</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer class="section-wrap footer-area super-dark-grey inner-shadow" id="works-cited">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<h6><a href="#to-top">^    TO THE TOP    ^</a></h6>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+	<script>
+		/*=================================
+		-------- SMOOTH SCROLL NAV --------
+		=================================*/
+
+		// NAV LINKS
+		$(function() {
+		  $('nav a[href*=#]:not([href=#])').click(function() {
+		    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+		      var target = $(this.hash);
+		      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+		      if (target.length) {
+		        $('html,body').animate({
+		          scrollTop: target.offset().top
+		        }, 600);
+		        return false;
+		      }
+		    }
+		  });
+		});
+
+		$(function() {
+		  $('.arrow a[href*=#]:not([href=#])').click(function() {
+		    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+		      var target = $(this.hash);
+		      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+		      if (target.length) {
+		        $('html,body').animate({
+		          scrollTop: target.offset().top
+		        }, 600);
+		        return false;
+		      }
+		    }
+		  });
+		});
+
+		/*==================================
+		---------- SCROLL WATCHER ----------
+		==================================*/
+		var lastKnownScrollPosition = 0;
+		$(window).scroll(function() {
+		  // Get current window position
+		  height = $(window).scrollTop()
+		  //console.log(height)
+
+		  // add small class
+		  if (height > 50) {
+		    $('#main-nav').addClass('scrolled');
+		  } else if (height == 0) {
+		    // Removes any hashes when top of window is reached.
+		    window.location.hash = "";
+		    $('#main-nav').removeClass('scrolled');
+		    $('#main-nav').removeClass('show');
+		  } else {
+		    $('#main-nav').removeClass('scrolled');
+		    $('#main-nav').removeClass('show');
+		  }
+
+		  if (lastKnownScrollPosition > height) {
+		  	$('#main-nav').addClass('show');
+		  } else if (height > 50) {
+		  	$('#main-nav').removeClass('show');
+		  }
+
+		  if (height > 100) {
+		  	$('#main-nav').addClass('sneak');
+		  } else {
+		  	$('#main-nav').removeClass('sneak');
+		  }
+
+		  lastKnownScrollPosition = height;
+		});
+
+
+		/*==================================
+		---------- SETS MIN HEIGHT ---------
+		==================================*/
+		
+
+		function setHeight() {
+	        windowHeight = $(window).innerHeight();
+	        $('.full-height').css('min-height', windowHeight);   
+	    };   
+
+		$(window).resize(function() {
+	        setHeight();   
+	    }); 
+
+	    $(document).ready(function() {  
+		    setHeight();
+
+		    console.log(navigator.userAgent);
+
+		    // Disable background Fixed on iOS
+			if((navigator.userAgent.match(/iPhone/i))     //Lines split for easy reading only
+			    || (navigator.userAgent.match(/iPod/i)) 
+			    || (navigator.userAgent.match(/iPad/i))){
+				var coverImgs = $('.cover-img');
+
+				for (var i = 0; i < coverImgs.length; i++) {
+					coverImgs[i].style.backgroundAttachment = 'scroll';			
+				}
+
+			    
+			}
+		});
+
+	</script>
+</body>
+</html>	
